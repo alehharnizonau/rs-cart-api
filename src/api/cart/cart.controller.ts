@@ -2,7 +2,7 @@ import { Controller, Get, Delete, Put, Body, Req, Post, UseGuards, HttpStatus } 
 
 // import { BasicAuthGuard, JwtAuthGuard } from '../auth';
 import { OrderService } from '../order';
-import { AppRequest, getUserIdFromRequest } from '../shared';
+import { AppRequest, getUserIdFromRequest } from '../../shared';
 
 import { calculateCartTotal } from './models-rules';
 import { CartService } from './services';
@@ -19,6 +19,8 @@ export class CartController {
   @Get()
   findUserCart(@Req() req: AppRequest) {
     const cart = this.cartService.findOrCreateByUserId(getUserIdFromRequest(req));
+
+    console.log(cart);
 
     return {
       statusCode: HttpStatus.OK,
