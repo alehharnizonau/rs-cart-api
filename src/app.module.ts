@@ -6,6 +6,8 @@ import { CartModule } from './api/cart/cart.module';
 import { AuthModule } from './api/auth/auth.module';
 import { OrderModule } from './api/order/order.module';
 import { DatabaseModule } from './database/database.module';
+import { ProductModule } from './api/product/product.module';
+import { UsersModule } from './api/users/users.module';
 
 @Module({
   imports: [
@@ -13,6 +15,8 @@ import { DatabaseModule } from './database/database.module';
     AuthModule,
     CartModule,
     OrderModule,
+    ProductModule,
+    UsersModule
   ],
   controllers: [
     AppController,

@@ -20,6 +20,8 @@ export class AppController {
   async login(@Request() req) {
     const token = this.authService.login(req.user, 'basic');
 
+    console.log('LOGIN', req);
+
     return {
       statusCode: HttpStatus.OK,
       message: 'OK',
@@ -32,6 +34,8 @@ export class AppController {
   @UseGuards(BasicAuthGuard)
   @Get('api/profile')
   async getProfile(@Request() req) {
+    console.log('GETPROFILE', req);
+
     return {
       statusCode: HttpStatus.OK,
       message: 'OK',

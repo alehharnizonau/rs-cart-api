@@ -26,6 +26,9 @@ export const handler: Handler = async (
   callback: Callback,
 ) => {
   console.log('SERVER INPUT');
+  console.log('event', event);
+  console.log('context', context);
+  console.log('callback', callback);
   server = (await bootstrap());
   return server(event, context, callback);
 };

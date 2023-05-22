@@ -1,11 +1,4 @@
-import {
-  Column,
-  Entity,
-  JoinColumn,
-  OneToMany,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn,
-} from 'typeorm';
+import { Column, Entity, JoinColumn, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 import { CartItems } from './cartItems.entity';
 
 export enum Status {
@@ -13,7 +6,7 @@ export enum Status {
   ORDERED = 'ORDERED',
 }
 
-@Entity()
+@Entity({ name: 'carts' })
 export class Carts {
   @PrimaryGeneratedColumn('uuid')
   id: string;
@@ -21,19 +14,19 @@ export class Carts {
   @Column({ type: 'uuid', nullable: false })
   user_id: string;
 
-  @UpdateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
-  created_at: string;
+  @UpdateDateColumn({ type: 'date', nullable: false })
+  created_at: Date;
 
-  @UpdateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
-  updated_at: string;
+  @UpdateDateColumn({ type: 'date', nullable: false })
+  updated_at: Date;
 
   @Column({ type: 'enum', enum: Status })
   status: Status;
 
   @OneToMany(
     () => CartItems,
-    cartItems => cartItems.carts,
-    { cascade: true },
+    cartItem => cartItem.cart,
+    { onDelete: 'CASCADE' },
   )
   @JoinColumn({ name: 'id', referencedColumnName: 'cart_id' })
   items: CartItems[];
